@@ -6,7 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface StudentMapper {
-
-    StudentDTO studentToStudentDTO(final Student student);
-    Student studentDTOToStudent(final StudentDTO studentDTO);
+    StudentDTO studentToStudentDto(final Student student);
+    Student studentDtoToStudent(final StudentDTO studentDTO);
 }

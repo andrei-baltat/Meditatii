@@ -3,36 +3,35 @@ package com.example.meditatii.services;
 import com.example.meditatii.DTO.StudentDTO;
 import com.example.meditatii.mappers.StudentMapper;
 import com.example.meditatii.repositories.StudentRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class StudentServiceJPA implements StudentService{
-    private StudentRepository repository;
-    private StudentMapper mapper;
+    private final StudentRepository repository;
+    private final StudentMapper mapper;
 
     @Override
     public List<StudentDTO> listAllStudents() {
         return repository.findAll()
                 .stream()
-                .map(student -> mapper.studentToStudentDTO(student))
+                .map(student -> mapper.studentToStudentDto(student))
                 .collect(Collectors.toList());
     }
 
     public Optional<StudentDTO> getStudentById(final Long id){
         return Optional.ofNullable
-                (mapper.studentToStudentDTO(repository.findById(id).orElse(null)));
+                (mapper.studentToStudentDto(repository.findById(id).orElse(null)));
     }
 
 
     public StudentDTO saveStudent(final StudentDTO student){
-        return mapper.studentToStudentDTO(repository.save(mapper.studentDTOToStudent(student)));
+        return mapper.studentToStudentDto(repository.save(mapper.studentDtoToStudent(student)));
     }
 
     public void updateStudent(final StudentDTO studentDTO){
