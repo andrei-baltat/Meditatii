@@ -35,7 +35,7 @@ public class StudentServiceJPA implements StudentService{
     }
 
     public void updateStudent(final StudentDTO studentDTO){
-        repository.findById(studentDTO.getId()).ifPresent(
+        repository.findById(Long.valueOf(studentDTO.getId())).ifPresent(
                 student -> {
                     student.setFirstName(studentDTO.getFirstName());
                     student.setAge(studentDTO.getAge());
