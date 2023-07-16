@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -28,6 +29,11 @@ public class StudentController {
     public StudentDTO getStudent(@PathVariable("studentID") Integer studentId){
         Optional<StudentDTO> studentById = studentService.getStudentById(studentId);
         return studentById.orElseGet(() -> StudentDTO.builder().build());
+    }
+
+    @GetMapping("/api/students")
+    public List<StudentDTO> getStudent(){
+        return studentService.listAllStudents();
     }
 
     @DeleteMapping("/api/student/{studentID}")

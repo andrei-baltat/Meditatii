@@ -6,6 +6,7 @@ import com.example.meditatii.repositories.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ public class StudentServiceJPA implements StudentService{
         return repository.findAll()
                 .stream()
                 .map(student -> mapper.studentToStudentDto(student))
+                .sorted(Comparator.comparing(StudentDTO::getId))
                 .collect(Collectors.toList());
     }
 
