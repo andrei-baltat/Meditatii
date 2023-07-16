@@ -36,14 +36,17 @@ public class StudentServiceJPA implements StudentService{
         return mapper.studentToStudentDto(repository.save(mapper.studentDtoToStudent(student)));
     }
 
-    public void updateStudent(final StudentDTO studentDTO){
+    public StudentDTO updateStudent(final StudentDTO studentDTO){
         repository.findById(Long.valueOf(studentDTO.getId())).ifPresent(
                 student -> {
                     student.setFirstName(studentDTO.getFirstName());
                     student.setAge(studentDTO.getAge());
                     student.setLastName(studentDTO.getLastName());
+                    repository.save(student);
                 }
         );
+
+        return getStudentById(studentDTO.getId()).orElse(StudentDTO.builder().build());
     }
 
     @Override

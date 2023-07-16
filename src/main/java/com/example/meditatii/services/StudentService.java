@@ -9,6 +9,6 @@ public interface StudentService {
     List<StudentDTO> listAllStudents();
     StudentDTO saveStudent(final StudentDTO studentDTO);
     Optional<StudentDTO> getStudentById(final Integer id);
-    void updateStudent(final StudentDTO studentDTO);
+    StudentDTO updateStudent(final StudentDTO studentDTO);
     void deleteStudent(final Integer studentId);
 }
