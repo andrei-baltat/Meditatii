@@ -44,4 +44,9 @@ public class StudentServiceJPA implements StudentService{
         );
     }
 
+    @Override
+    public void deleteStudent(Integer studentId) {
+        repository.deleteById(Long.valueOf(studentId));
+    }
+
 }

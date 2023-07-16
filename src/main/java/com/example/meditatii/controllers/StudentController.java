@@ -3,6 +3,7 @@ package com.example.meditatii.controllers;
 import com.example.meditatii.DTO.StudentDTO;
 import com.example.meditatii.services.StudentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,8 +25,13 @@ public class StudentController {
     }
 
     @GetMapping("/api/student/{studentID}")
-    public StudentDTO getStudent(@PathVariable("studentID") Integer student){
-        Optional<StudentDTO> studentById = studentService.getStudentById(student);
+    public StudentDTO getStudent(@PathVariable("studentID") Integer studentId){
+        Optional<StudentDTO> studentById = studentService.getStudentById(studentId);
         return studentById.orElseGet(() -> StudentDTO.builder().build());
+    }
+
+    @DeleteMapping("/api/student/{studentID}")
+    public void removeStudent(@PathVariable("studentID") Integer studentId){
+        studentService.deleteStudent(studentId);
     }
 }
