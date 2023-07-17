@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface StudentService {
     List<StudentDTO> listAllStudents();
+    List<StudentDTO> listAllStudentsOrderByFirstNameDesc();
     StudentDTO saveStudent(final StudentDTO studentDTO);
     Optional<StudentDTO> getStudentById(final Integer id);
     StudentDTO updateStudent(final StudentDTO studentDTO);

@@ -33,11 +33,16 @@ public class StudentController {
         return studentById.orElseGet(() -> StudentDTO.builder().build());
     }
 
-//    ASK: nu pot avea acelasi endpoint cu get unul sa primeasca parametrii si unul nu?
+//    ASK: nu pot avea acelasi endpoint cu get unul sa primeasca parametrii si altul nu?
 
     @GetMapping("/api/students")
     public List<StudentDTO> getStudent(){
         return studentService.listAllStudents();
+    }
+
+    @GetMapping("/api/studentsDESC")
+    public List<StudentDTO> getStudentsOrderByFirstNameDesc(){
+        return studentService.listAllStudentsOrderByFirstNameDesc();
     }
 
     @GetMapping("/api/student")

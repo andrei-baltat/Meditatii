@@ -26,6 +26,13 @@ public class StudentServiceJPA implements StudentService{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<StudentDTO> listAllStudentsOrderByFirstNameDesc() {
+        return repository.findAllOrderByFirstName().stream()
+                .map(mapper::studentToStudentDto)
+                .collect(Collectors.toList());
+    }
+
     public Optional<StudentDTO> getStudentById(final Integer id){
         return Optional.ofNullable
                 (mapper.studentToStudentDto(repository.findById(Long.valueOf(id)).orElse(null)));
