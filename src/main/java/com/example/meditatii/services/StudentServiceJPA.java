@@ -1,6 +1,7 @@
 package com.example.meditatii.services;
 
 import com.example.meditatii.DTO.StudentDTO;
+import com.example.meditatii.controllers.StudentNotFoundException;
 import com.example.meditatii.mappers.StudentMapper;
 import com.example.meditatii.repositories.StudentRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class StudentServiceJPA implements StudentService{
+public class StudentServiceJPA implements StudentService {
     private final StudentRepository repository;
     private final StudentMapper mapper;
 
@@ -33,17 +34,17 @@ public class StudentServiceJPA implements StudentService{
                 .collect(Collectors.toList());
     }
 
-    public Optional<StudentDTO> getStudentById(final Integer id){
+    public Optional<StudentDTO> getStudentById(final Integer id) throws StudentNotFoundException {
         return Optional.ofNullable
-                (mapper.studentToStudentDto(repository.findById(Long.valueOf(id)).orElse(null)));
+                (mapper.studentToStudentDto(repository.findById(Long.valueOf(id)).orElseThrow(() -> new StudentNotFoundException())));
     }
 
 
-    public StudentDTO saveStudent(final StudentDTO student){
+    public StudentDTO saveStudent(final StudentDTO student) {
         return mapper.studentToStudentDto(repository.save(mapper.studentDtoToStudent(student)));
     }
 
-    public StudentDTO updateStudent(final StudentDTO studentDTO){
+    public StudentDTO updateStudent(final StudentDTO studentDTO) throws StudentNotFoundException {
         repository.findById(Long.valueOf(studentDTO.getId())).ifPresent(
                 student -> {
                     student.setFirstName(studentDTO.getFirstName());
