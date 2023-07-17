@@ -3,4 +3,4 @@
 3. Creeaza o metoda de rest unde sa iti faca jpa-ul query-ul DONE
 4. Creeaza o metoda unde sa iti faci un custom query cu @Query care spre exemplu sa iti afiseze toti studentii crescator dupa firstName(jpql) DONE
 5. Creeaza o metoda o metoda asemanatoare cu cea de la punctul 4 dar care sa se foloseasca de un entityManager
-6. Sa adaugi 2-3 exceptii custom in metodele unde crezi ca se potriveste
+6. Sa adaugi 2-3 exceptii custom in metodele unde crezi ca se potriveste DONE
