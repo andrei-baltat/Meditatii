@@ -54,4 +54,11 @@ public class StudentServiceJPA implements StudentService{
         repository.deleteById(Long.valueOf(studentId));
     }
 
+    @Override
+    public List<StudentDTO> findByFirstName(String firstName) {
+        return repository.findByFirstName(firstName)
+                .stream().map(mapper::studentToStudentDto)
+                .collect(Collectors.toList());
+    }
+
 }

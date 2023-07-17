@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -32,9 +33,16 @@ public class StudentController {
         return studentById.orElseGet(() -> StudentDTO.builder().build());
     }
 
+//    ASK: nu pot avea acelasi endpoint cu get unul sa primeasca parametrii si unul nu?
+
     @GetMapping("/api/students")
     public List<StudentDTO> getStudent(){
         return studentService.listAllStudents();
+    }
+
+    @GetMapping("/api/student")
+    public List<StudentDTO> getStudentsByFirstName(@RequestParam(name = "firstName") final String firstName){
+        return studentService.findByFirstName(firstName);
     }
 
     @DeleteMapping("/api/student/{studentID}")

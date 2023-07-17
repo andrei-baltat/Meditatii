@@ -11,4 +11,5 @@ public interface StudentService {
     Optional<StudentDTO> getStudentById(final Integer id);
     StudentDTO updateStudent(final StudentDTO studentDTO);
     void deleteStudent(final Integer studentId);
+    List<StudentDTO> findByFirstName(final String firstName);
 }
