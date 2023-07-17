@@ -66,7 +66,7 @@ public class StudentController {
         try {
             return studentService.updateStudent(student);
         } catch (StudentNotFoundException exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not updated");
         }
     }
 }
