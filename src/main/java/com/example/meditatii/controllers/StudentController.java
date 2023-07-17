@@ -47,6 +47,7 @@ public class StudentController {
     }
 
     @GetMapping("/api/studentsDESC")
+//    ASK: cum pot sa folosesc parametrul primit aici, tocmai in JPA? Sa fac DESC sau ASC
     public List<StudentDTO> getStudentsOrderByFirstNameDesc() {
         return studentService.listAllStudentsOrderByFirstNameDesc();
     }
