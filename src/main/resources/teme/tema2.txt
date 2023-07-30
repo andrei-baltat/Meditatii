@@ -1,5 +1,5 @@
 Create tables to store the Pethood clinic data based on the following criteria
-    The perhood clinic has Doctors
+    The pethood clinic has Doctors
     All the doctors see multiple patients (Pets)
     A Pet can have multiple Doctors
     A Pet can have one and only one Owner
