@@ -1,0 +1,9 @@
+Create tables to store the Pethood clinic data based on the following criteria
+    The perhood clinic has Doctors
+    All the doctors see multiple patients (Pets)
+    A Pet can have multiple Doctors
+    A Pet can have one and only one Owner
+    An Owner can have multiple Pets
+    Pet information including photo needs to be available to the Doctor
+    Pet Consultation history needs to be available in the DB
+    Consultations need to be registered in the DB and need to contain at a minimum the date, the doctor, the pet and notes on consultation

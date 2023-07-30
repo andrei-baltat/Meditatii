@@ -13,7 +13,7 @@ public interface StudentService {
 
     StudentDTO saveStudent(final StudentDTO studentDTO);
 
-    Optional<StudentDTO> getStudentById(final Integer id) throws StudentNotFoundException;
+    Optional<StudentDTO> getStudentById(final Long id) throws StudentNotFoundException;
 
     StudentDTO updateStudent(final StudentDTO studentDTO) throws StudentNotFoundException;
 

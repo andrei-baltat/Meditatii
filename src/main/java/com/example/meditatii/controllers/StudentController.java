@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,7 +33,7 @@ public class StudentController {
     @GetMapping("/api/student/{studentID}")
     public StudentDTO getStudent(@PathVariable("studentID") Integer studentId) {
         try {
-            Optional<StudentDTO> studentById = studentService.getStudentById(studentId);
+            Optional<StudentDTO> studentById = studentService.getStudentById(Long.valueOf(studentId));
             return studentById.get();
         } catch (StudentNotFoundException exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found");
@@ -48,7 +49,7 @@ public class StudentController {
 
     @GetMapping("/api/studentsDESC")
 //    ASK: cum pot sa folosesc parametrul primit aici, tocmai in JPA? Sa fac DESC sau ASC
-    public List<StudentDTO> getStudentsOrderByFirstNameDesc() {
+    public List<StudentDTO> getStudentsOrderByFirstNameDesc(@PathVariable(value = "order") final String order) {
         return studentService.listAllStudentsOrderByFirstNameDesc();
     }
 
@@ -62,7 +63,7 @@ public class StudentController {
         studentService.deleteStudent(studentId);
     }
 
-    @PutMapping("/api/student")
+    @PatchMapping("/api/student")
     public StudentDTO updateStudent(@RequestBody StudentDTO student) {
         try {
             return studentService.updateStudent(student);
