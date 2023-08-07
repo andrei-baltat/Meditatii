@@ -24,13 +24,13 @@ public class StudentController {
 
     private final StudentService studentService;
 
-    @PostMapping("/api/student")
+    @PostMapping("api/student")
     public StudentDTO createStudent(@RequestBody StudentDTO studentDTO) {
         StudentDTO studentCreated = studentService.saveStudent(studentDTO);
         return studentCreated;
     }
 
-    @GetMapping("/api/student/{studentID}")
+    @GetMapping("api/student/{studentID}")
     public StudentDTO getStudent(@PathVariable("studentID") Integer studentId) {
         try {
             Optional<StudentDTO> studentById = studentService.getStudentById(Long.valueOf(studentId));
@@ -42,28 +42,28 @@ public class StudentController {
 
 //    ASK: nu pot avea acelasi endpoint cu get unul sa primeasca parametrii si altul nu?
 
-    @GetMapping("/api/students")
+    @GetMapping("api/students")
     public List<StudentDTO> getStudent() {
         return studentService.listAllStudents();
     }
 
-    @GetMapping("/api/studentsDESC")
+    @GetMapping("api/studentsDESC")
 //    ASK: cum pot sa folosesc parametrul primit aici, tocmai in JPA? Sa fac DESC sau ASC
     public List<StudentDTO> getStudentsOrderByFirstNameDesc(@PathVariable(value = "order") final String order) {
         return studentService.listAllStudentsOrderByFirstNameDesc();
     }
 
-    @GetMapping("/api/student")
+    @GetMapping("api/student")
     public List<StudentDTO> getStudentsByFirstName(@RequestParam(name = "firstName") final String firstName) {
         return studentService.findByFirstName(firstName);
     }
 
-    @DeleteMapping("/api/student/{studentID}")
+    @DeleteMapping("api/student/{studentID}")
     public void removeStudent(@PathVariable("studentID") Integer studentId) {
         studentService.deleteStudent(studentId);
     }
 
-    @PatchMapping("/api/student")
+    @PatchMapping("api/student")
     public StudentDTO updateStudent(@RequestBody StudentDTO student) {
         try {
             return studentService.updateStudent(student);

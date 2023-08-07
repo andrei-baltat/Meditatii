@@ -26,9 +26,12 @@ public class Pet {
     private String name;
 
     @ManyToOne
+    // ASK: asta se citeste ca MANY pets can have one owner?
+    // R: asta se citeste ca MANY pets sunt asignate la un owner?
     @JoinColumn(name = "owners_id")
+//    deci unde ai @JoinColumn inseamna ca asta este tabela parinte, si ai o referinta catre owners
     private Owner owner;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "pets")
     private Set<Doctor> doctors;
 }

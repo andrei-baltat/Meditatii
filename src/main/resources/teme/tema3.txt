@@ -1,0 +1,24 @@
+For Doctors
+
+Adding a doctor to the Pethood clinic
+Retrieve a list of doctors
+
+
+For Pets
+
+Add a pet, including the owner
+Removing a pet
+Upload photo for a pet
+Retrieve a pet's photo
+Add a doctor to a pet
+
+
+
+For Consultations
+
+Add Consultation
+Remove consultation
+Retrieve all consultations for a pet or a doctor
+
+Extra
+Retrieving pets based on owner or doctor ids

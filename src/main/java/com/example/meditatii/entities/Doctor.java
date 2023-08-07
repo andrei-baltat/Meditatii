@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -24,5 +26,11 @@ public class Doctor {
     private String name;
 
     @ManyToMany
+//    ASK: conteaza daca asta e pe entitatea de doctors sau de pets?
+    @JoinTable(name = "doctor_pets",
+            joinColumns = @JoinColumn(name = "doctor_id"),
+            inverseJoinColumns = @JoinColumn(name = "pets_id")
+//            care e join column ala e ownerul @JoinTable
+    )
     private Set<Pet> pets;
 }

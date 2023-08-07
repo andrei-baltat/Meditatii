@@ -5,7 +5,9 @@ import com.example.meditatii.controllers.StudentNotFoundException;
 import com.example.meditatii.entities.Student;
 import com.example.meditatii.mappers.StudentMapper;
 import com.example.meditatii.repositories.StudentRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
