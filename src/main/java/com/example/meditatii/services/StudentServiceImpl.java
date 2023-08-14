@@ -1,16 +1,13 @@
 package com.example.meditatii.services;
 
 import com.example.meditatii.DTO.StudentDTO;
-import com.example.meditatii.controllers.StudentNotFoundException;
+import com.example.meditatii.exceptions.ResourceNotFoundException;
 import com.example.meditatii.entities.Student;
 import com.example.meditatii.mappers.StudentMapper;
 import com.example.meditatii.repositories.StudentRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,24 +19,15 @@ public class StudentServiceImpl implements StudentService {
     private final StudentMapper mapper;
 
     @Override
-    public List<StudentDTO> listAllStudents() {
-        return repository.findAll()
-                .stream()
-                .map(student -> mapper.studentToStudentDto(student))
-//                .sorted(Comparator.comparing(StudentDTO::getId)) // deja pe findall vine sortat, sau poti face FindAllById
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<StudentDTO> listAllStudentsOrderByFirstNameDesc() {
         return repository.findAllOrderByFirstName().stream()
                 .map(mapper::studentToStudentDto)
                 .collect(Collectors.toList());
     }
 
-    public Optional<StudentDTO> getStudentById(final Long id) throws StudentNotFoundException {
-        return Optional.ofNullable(
-                (mapper.studentToStudentDto(repository.findById(id).orElseThrow(() -> new StudentNotFoundException()))));
+    public StudentDTO getStudentById(final Long id){
+        return mapper.studentToStudentDto(repository.findById(id).orElseThrow(
+                        () -> new ResourceNotFoundException("Student","id:", id)));
     }
 
 
@@ -47,8 +35,8 @@ public class StudentServiceImpl implements StudentService {
         return mapper.studentToStudentDto(repository.save(mapper.studentDtoToStudent(student)));
     }
 
-    public StudentDTO updateStudent(final StudentDTO studentDTO) throws StudentNotFoundException {
-        Student student = repository.findById(Long.valueOf(studentDTO.getId())).orElse(null);
+    public StudentDTO updateStudent(final StudentDTO studentDTO) throws ResourceNotFoundException {
+        Student student = repository.findById(studentDTO.getId()).orElse(null);
         if (student != null) {
             student.setFirstName(studentDTO.getFirstName());
             student.setAge(studentDTO.getAge());
@@ -57,7 +45,7 @@ public class StudentServiceImpl implements StudentService {
         } else {
             return StudentDTO.builder().build();
         }
-        return getStudentById(studentDTO.getId()).get();
+        return getStudentById(studentDTO.getId());
 
 //        repository.findById(studentDTO.getId()).ifPresent(
 //                student -> {
@@ -80,6 +68,15 @@ public class StudentServiceImpl implements StudentService {
     public List<StudentDTO> findByFirstName(String firstName) {
         return repository.findByFirstName(firstName)
                 .stream().map(mapper::studentToStudentDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<StudentDTO> listAll() {
+        return repository.findAll()
+                .stream()
+                .map(student -> mapper.studentToStudentDto(student))
+//                .sorted(Comparator.comparing(StudentDTO::getId)) // deja pe findall vine sortat, sau poti face FindAllById
                 .collect(Collectors.toList());
     }
 

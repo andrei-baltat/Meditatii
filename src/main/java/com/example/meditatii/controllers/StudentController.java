@@ -1,6 +1,7 @@
 package com.example.meditatii.controllers;
 
 import com.example.meditatii.DTO.StudentDTO;
+import com.example.meditatii.exceptions.ResourceNotFoundException;
 import com.example.meditatii.services.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,19 +32,14 @@ public class StudentController {
 
     @GetMapping("api/student/{studentID}")
     public StudentDTO getStudent(@PathVariable("studentID") Integer studentId) {
-        try {
-            Optional<StudentDTO> studentById = studentService.getStudentById(Long.valueOf(studentId));
-            return studentById.get();
-        } catch (StudentNotFoundException exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found");
-        }
+            return studentService.getStudentById(Long.valueOf(studentId));
     }
 
 //    ASK: nu pot avea acelasi endpoint cu get unul sa primeasca parametrii si altul nu?
 
     @GetMapping("api/students")
     public List<StudentDTO> getStudent() {
-        return studentService.listAllStudents();
+        return studentService.listAll();
     }
 
     @GetMapping("api/studentsDESC")
@@ -67,7 +62,7 @@ public class StudentController {
     public StudentDTO updateStudent(@RequestBody StudentDTO student) {
         try {
             return studentService.updateStudent(student);
-        } catch (StudentNotFoundException exception) {
+        } catch (ResourceNotFoundException exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not updated");
         }
     }

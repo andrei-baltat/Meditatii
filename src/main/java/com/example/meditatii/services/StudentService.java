@@ -1,23 +1,24 @@
 package com.example.meditatii.services;
 
 import com.example.meditatii.DTO.StudentDTO;
-import com.example.meditatii.controllers.StudentNotFoundException;
+import com.example.meditatii.exceptions.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface StudentService {
-    List<StudentDTO> listAllStudents();
+public interface StudentService{
 
     List<StudentDTO> listAllStudentsOrderByFirstNameDesc();
 
     StudentDTO saveStudent(final StudentDTO studentDTO);
 
-    Optional<StudentDTO> getStudentById(final Long id) throws StudentNotFoundException;
+    StudentDTO getStudentById(final Long id);
 
-    StudentDTO updateStudent(final StudentDTO studentDTO) throws StudentNotFoundException;
+    StudentDTO updateStudent(final StudentDTO studentDTO);
 
     void deleteStudent(final Integer studentId);
 
     List<StudentDTO> findByFirstName(final String firstName);
+
+    List<StudentDTO> listAll();
 }

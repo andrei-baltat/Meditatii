@@ -9,6 +9,10 @@ Create tables to store the Pethood clinic data based on the following criteria
     Consultations need to be registered in the DB and need to contain at a minimum the date, the doctor, the pet and notes on consultation
 
 
+
+
+
+
     Testare - unitara cat si de integrare
     Exceptiile - cum / unde le aruncam in controller? serviciu?
     Servicii sa comunice intre ele. Concepte
